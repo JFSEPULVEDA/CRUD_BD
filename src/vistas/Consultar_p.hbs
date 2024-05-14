@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Consultar Pedido</title>
+    <meta charset="utf-8" />
+    <link href="StyleSheet.css" rel="stylesheet" />
+    <style>
+        /* Override styles from StyleSheet.css (if needed) */
+        body {
+            background-color: #cbcbc4;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 50px;
+            font-size: 30px;
+        }
+
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            background-color: #008cba;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons:hover {
+            background-color: #006cc7;
+        }
+        
+        /* Estilos para la tabla de respuesta */
+        #tablaPedido {
+            margin: 20px auto;
+            padding: 10px;
+            width: 50%;
+            border-collapse: collapse;
+        }
+        
+        #tablaPedido th, #tablaPedido td {
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            padding: 7px;
+            text-align: left;
+        }
+        
+        #tablaPedido th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/Consultar_p" method="post">
+        <h2>Consultar Pedido</h2><br>
+        <label for="name">Id_pedido:</label>
+        <input type="text" name="id_pedido" placeholder="Id_Pedido" required /><br>
+        <input class="buttons" type="submit" name="Consultar" value="Consultar">
+    </form>
+
+    <div id="tablaPedido"></div>
+    <script>
+      document.querySelector('form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        const id_pedido = document.querySelector('input[name="id_pedido"]').value;
+
+        const response = await fetch('/Consultar_p', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id_pedido })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Construir la tabla
+          const tablaPedido = document.getElementById('tablaPedido');
+          tablaPedido.innerHTML = ''; // Limpiar tabla anterior si existe
+          
+          const table = document.createElement('table');
+          const tbody = document.createElement('tbody');
+
+          // Cabecera de la tabla
+          const thead = document.createElement('thead');
+          const headerRow = document.createElement('tr');
+          for (const key in data) {
+            const th = document.createElement('th');
+            th.textContent = key;
+            headerRow.appendChild(th);
+          }
+          thead.appendChild(headerRow);
+          table.appendChild(thead);
+
+          // Contenido de la tabla
+          const row = document.createElement('tr');
+          for (const key in data) {
+            const td = document.createElement('td');
+            td.textContent = data[key];
+            row.appendChild(td);
+          }
+          tbody.appendChild(row);
+          table.appendChild(tbody);
+
+          tablaPedido.appendChild(table);
+        } else {
+          // Mostrar mensaje de error
+          alert(data.error || 'Error desconocido');
+        }
+      });
+    </script>
+</body>
+
+</html>

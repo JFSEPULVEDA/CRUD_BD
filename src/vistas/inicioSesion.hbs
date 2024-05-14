@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+    <style>
+        body {
+            background-color: #cbcbc4; /* Amarillo claro */
+            text-align: center; /* Centrado */
+        }
+        form {
+            margin: 0 auto; /* Centrado horizontal */
+            width: 50%; /* Ancho del formulario */
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: white;
+        }
+        label {
+            display: block; /* Para que los labels estén en líneas separadas */
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #94be96; /* Verde */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049; /* Verde oscuro al pasar el ratón */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:brown">Inicio de sesión</h1>
+
+    <form action="/inicioSesion" method="POST">
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Iniciar sesión</button>
+    </form>
+</body>
+</html>
+
