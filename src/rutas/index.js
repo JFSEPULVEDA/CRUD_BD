@@ -72,26 +72,33 @@ archivo.get("/crear_pedido", (req, res, next) => {
 });
 
 archivo.post("/crear_pedido", async (req, res) => {
-  const { id_pedido, comprador, valor, articulo, descripcion, date } = req.body;
+  const { id_pedido, comprador, valor, articulo, cantidad, descripcion, total, date } = req.body;
 
   const p = await orden.findOne({ id_pedido });
 
   if (p) {
     res.send("el pedido ya existe");
   } else {
+   
     const nuevoP = new orden({
       id_pedido,
       comprador,
       valor,
       articulo,
+      cantidad,
       descripcion,
-      date,
+      total,
+      date
+      
     });
     await nuevoP.save();
 
-    res.send("el pedido se guardo satisfactoriamente");
+    res.send('el pedido se guardo satisfactoriamente');
   }
 });
+
+
+
 
 //get => consultar pedidos
 archivo.get("/Consultar_p", (req, res, next) => {

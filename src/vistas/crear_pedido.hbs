@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Pedidos</title>
   <meta charset="UTF-8" />
@@ -15,7 +16,8 @@
     h1 {
       margin-top: 50px;
       font-size: 30px;
-      color: #67412a; /* Color marrón */
+      color: #67412a;
+      /* Color marrón */
     }
 
     /* Estilo para el formulario */
@@ -70,6 +72,7 @@
     }
   </style>
 </head>
+
 <body>
   <center>
     <h1 style="color: brown ;">CREAR PEDIDOS</h1><br>
@@ -87,13 +90,40 @@
       <label for="articulo">Artículo:</label>
       <input type="text" id="articulo" name="articulo" required><br>
 
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" id="cantidad" name="cantidad" required oninput="calculatetotal()"><br>
+
       <label for="descripcion">Descripción del Pedido:</label>
       <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea><br>
+
+      <label for="total">Total $ :</label>
+      <input type="number" id="total" name="total" readonly><br>
+
+
+
 
       <button type="submit">Crear Pedido</button>
 
     </form>
+
+    <p id="responseMessage"></p>
+
   </center>
+
+    <script>
+    function calculatetotal() {
+        const valor = document.getElementById('valor').value;
+        const cantidad = document.getElementById('cantidad').value;
+        const total = document.getElementById('total');
+        
+        total.value = valor * cantidad;
+    }
+</script>
+
+
+
+  
 </body>
+
 </html>
 

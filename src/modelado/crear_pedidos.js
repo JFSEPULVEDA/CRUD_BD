@@ -8,8 +8,9 @@ const UserSchema = new Schema({
     comprador: {type: String, required: true},
     valor: {type: Number, required: true},
     articulo: {type: String, required: true},
-    descripcion: {type: String, required: true},
-
+    cantidad: {type: Number, required: true},
+    descripcion: {type: String, required: true},    
+    total: { type: Number, required: true },
     date: {type: Date, default:Date.now}
 })
 
